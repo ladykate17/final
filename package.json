@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "angular-ui-bootstrap": "^0.13.3",
+    "body-parser": "^1",
+    "express": "^4",
+    "jade": "^1",
+    "mongoose": "^4.1.2"
+  }
+}

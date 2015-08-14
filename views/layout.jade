@@ -1,0 +1,30 @@
+doctype html
+html(lang='en' ng-app="orderlyApp" )
+	head
+		meta(charset="utf-8")
+		link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css", rel="stylesheet")
+		link(href="css/main.css", rel="stylesheet")
+		title ORDERLY
+
+	body
+		.container-fluid
+					.row
+						nav.nav.navbar-default
+							.row
+								.col-sm-10.col-sm-offset-1
+
+									ul.nav.navbar-left
+										li
+											a.navbar-brand(href="/") orderly
+
+									ul.nav.navbar-nav.navbar-right
+										li
+											a(href="/auth/logout") Log out
+		block content
+
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular.js")
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.3/ui-bootstrap-tpls.min.js")
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular-route.js")
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular-animate.js")
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular-resource.js")
+		script(src="js/main.js")

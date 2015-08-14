@@ -1,0 +1,33 @@
+script(type='text/ng-template', id='new-project.jade')
+.modal-content
+	.modal-body
+		h1 New Project:
+
+		//- .col-sm-9.col-md-7.col-lg-6
+		form(ng-submit="createProject()") 
+			.form-group
+				input.form-control(ng-model="newProject.name" placeholder="name")
+
+			.form-group
+				select.form-control(ng-model="newProject.priority" ng-options="option.val as option.name for option in [{ name: 'High Priority', val : 3 }, { name: 'Medium Priority', val : 2 }, { name: 'Low Priority', val: 1 }]")
+					option(value="") Select Priority
+			
+			.form-group.input-group
+				.input-group-addon $
+				input.form-control(ng-model="newProject.budget" placeholder="budget")
+				.input-group-addon .00
+
+			//- .form-group
+			//- 	input.form-control(ng-model="newProject.tasks" placeholder="task")
+
+			.form-group.input-group(ng-repeat="item in newProject.tasks")
+				input.form-control(ng-model="item.tasks" placeholder="task")
+				.input-group-addon.btn-danger(type="button" ng-click="newProject.tasks.splice($index, 1)" aria-label="Remove") x
+
+			.form-group
+				button.btn(type="button" ng-click="addfield()") add another task
+
+			.form-group
+				input.btn(type="submit" ng-click="ok()")
+				//- input.btn.btn-warning(type="button" ng-click="cancel()") cancel
+
