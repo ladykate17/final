@@ -4,7 +4,10 @@ var mongoose = require('mongoose');
 var listsSchema = mongoose.Schema({
 	name 		: {type: String},
 	budget 		: {type: Number},
-	items 		: [],
+	items 		: [
+		{	text: String,
+			complete: {type: Boolean, default: false}
+		}],
 	owner		: { type: mongoose.Schema.ObjectId, ref : "user"},
 
 });

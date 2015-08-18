@@ -8,37 +8,43 @@ html(lang='en')
 
 	body.login-page
 		.container-fluid
-			.row
+			.row.login-row-padding
 				.col-md-6.text-col
-					.col-md-8.col-md-offset-2.text-center
-						h1.text-col orderly
-						p The tidy to-do list and project manager that keeps you on task and on budget! This clean app will help you increase productivity by keeping all your shopping and project lists logically organzized and all in one place.
+					.col-md-7.col-md-offset-4.text-center.text-col
+						.row.ex-pad
+							h1.welcome-title orderly
+						.row
+							.col-xs-10.col-xs-offset-1.divider-inverse
+						.row
+							p The tidy to-do list and project manager that keeps you on task and on budget! This clean app will help you increase productivity by keeping all your projects and shopping lists logically organzized in one place.
 				.col-md-6
-					.col-md-9.login-block
+					.row
+						.col-md-7.login-block
 
-						//- Form for handling existing user logins.
-						h1 Sign In
-						form(action="/auth/login", method="post")
-							.form-group
-								input.form-control(type="text", name="username", placeholder="Username")
-							.form-group
-								input.form-control(type="password", name="password", placeholder="Password")
-							.form-group
-								input.form-control(type="submit")
+							//- Form for handling existing user logins.
+							h1 Sign In
+							form(action="/auth/login", method="post")
+								.form-group
+									input.form-control(type="text", name="username", placeholder="Username")
+								.form-group
+									input.form-control(type="password", name="password", placeholder="Password")
+								.form-group
+									input.btn.form-control.add-btn-custom(type="submit")
 
-						p No Account? Sign up.
+							p Need an account?
+								a  Sign up.
 
 						//- Form for allowing new users to register.
-						h1 Register
-						form.form-group(action="/auth/signup", method="post")
-							.form-group
-								input.form-control(type="text", name="username", placeholder="Username")
-							.form-group
-								input.form-control(type="email", name="email", placeholder="Email")
-							.form-group
-								input.form-control(type="password", name="password", placeholder="Password")
-							.form-group
-								input.form-control(type="submit")
+							h1 Register
+							form.form-group(action="/auth/signup", method="post")
+								.form-group
+									input.form-control(type="text", name="username", placeholder="Username")
+								.form-group
+									input.form-control(type="email", name="email", placeholder="Email")
+								.form-group
+									input.form-control(type="password", name="password", placeholder="Password")
+								.form-group
+									input.form-control(type="submit")
 			
 		script(src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular.js")
 		script(src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.3/ui-bootstrap-tpls.min.js")

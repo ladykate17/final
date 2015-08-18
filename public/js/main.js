@@ -97,74 +97,140 @@ angular
 //----- Modal Ctrl----- //
 angular
 	.module( 'orderlyApp' )
-	.controller('ModalCtrl', function ($scope, $modal, $log) {
+	.controller('ModalCtrl', function ($scope, $modal, $log, $timeout) {
 
-	$scope.items = [];
+		$scope.items = [];
 
-	$scope.animationsEnabled = true;
+		$scope.animationsEnabled = true;
 
-	$scope.openProject = function (size) {
+		$scope.openProject = function (size) {
+		
+			var modalInstance = $modal.open({
+				animation: $scope.animationsEnabled,
+				templateUrl: 'templates/new-project',
+				controller: 'ModalInstanceCtrl',
+				size: size,
+				resolve: {
+					items: function () {
+					return $scope.items;
+		        	}
+		    	}
+			});
+
+		    modalInstance.result.then(function (selectedItem) {
+				$scope.selected = selectedItem;
+		    }, function () {
+				$log.info('Modal dismissed at: ' + new Date());
+		    });
+		};
+
+		$scope.openList = function (size) {
+		
+			var modalInstance = $modal.open({
+				animation: $scope.animationsEnabled,
+				templateUrl: 'templates/new-shop-list',
+				controller: 'ModalInstanceCtrl',
+				size: size,
+				resolve: {
+					items: function () {
+					return $scope.items;
+		        	}
+		    	}
+			});
+
+		    modalInstance.result.then(function (selectedItem) {
+				$scope.selected = selectedItem;
+		    }, function () {
+				$log.info('Modal dismissed at: ' + new Date());
+		    });
+		};
+
+
+		$scope.toggleAnimation = function () {
+			$scope.animationsEnabled = !$scope.animationsEnabled;
+		};
+
+		$scope.progress = function(value) {
+			var valueInt = parseInt($scope.value)
+			num = 0;
+			var count = num + valueInt
+
+		}
+
+		
+
+	    // Item List Arrays
+	    $scope.unChecked = [];
+	    $scope.checked = [];
+
+	    // Add a Item to the list
+	    $scope.addCheckedItem = function () {
+
+	        $scope.unChecked.push({
+	            amount: $scope.itemAmount,
+	            name: $scope.itemName
+	        });
+
+	        // Clear input fields after push
+	        $scope.itemAmount = '';
+	        $scope.itemName = '';
+
+	    };
+
+	    // Add Item to Checked List and delete from Unchecked List
+	    $scope.toggleChecked = function (index, project) {
+	        $scope.checked.push($scope.unChecked[index]);
+	    	console.log('hello?', $scope.checked)
+	        $scope.unChecked.splice(index, 1);
+	        project.$save()
+	    };
+
+
+	    // Get Total Items
+	    $scope.getTotalItems = function () {
+	        return $scope.unChecked.length;
+	    };
+
+	    // Get Total Checked Items
+	    $scope.getTotalCheckedItems = function () {
+	        return $scope.checked.length;
+	    };
+
 	
-		var modalInstance = $modal.open({
-			animation: $scope.animationsEnabled,
-			templateUrl: 'templates/new-project',
-			controller: 'ModalInstanceCtrl',
-			size: size,
-			resolve: {
-				items: function () {
-				return $scope.items;
-	        	}
-	    	}
-		});
+		console.log("working?")
+		$scope.isCrossedOff = false;
+			$scope.activateButton = function(index, item) {
+				items.isCrossedOff = items.isCrossedOff;
+			}  
+		
+		// $scope.tasksTotal = function() {
+		// 	totalTasks = 0;
 
-	    modalInstance.result.then(function (selectedItem) {
-			$scope.selected = selectedItem;
-	    }, function () {
-			$log.info('Modal dismissed at: ' + new Date());
-	    });
-	};
+		// 	for (i = 0; i < taskCost; i++){
+		// 		var result = totalTasks + i
+		// 	}
 
-	$scope.openList = function (size) {
-	
-		var modalInstance = $modal.open({
-			animation: $scope.animationsEnabled,
-			templateUrl: 'templates/new-shop-list',
-			controller: 'ModalInstanceCtrl',
-			size: size,
-			resolve: {
-				items: function () {
-				return $scope.items;
-	        	}
-	    	}
-		});
-
-	    modalInstance.result.then(function (selectedItem) {
-			$scope.selected = selectedItem;
-	    }, function () {
-			$log.info('Modal dismissed at: ' + new Date());
-	    });
-	};
-
-
-	$scope.toggleAnimation = function () {
-		$scope.animationsEnabled = !$scope.animationsEnabled;
-	};
-
-	$scope.progress = function(value) {
-		var valueInt = parseInt($scope.value)
-		num = 0;
-		var count = num + valueInt
-		console.log(count)
-
-		// if (value === true){
-		// 	console.log($scope.count)
-		// 	$scope.count++
+		// 	return result
 		// }
-		// else {
-		// 	console.log($scope.count)
-		// 	$scope.count--
-		// }
-	}
+		$timeout(function() {
+			
+			$scope.projectBudgetTotals = function(project, budget) {
+				$scope.total = 0;
+				console.log($scope.total)
+
+				for (i = 0; i < $scope.projects.length; i++){
+					var budget = $scope.projects[i].budget
+					$scope.total += budget
+					console.log($scope.total)
+				}
+
+				
+			}
+
+			$scope.projectBudgetTotals()
+
+		}, 500);
+
 
 	});
 
@@ -174,60 +240,97 @@ angular
 	.module( 'orderlyApp' )
 	.controller('ModalInstanceCtrl', function ($scope, $modalInstance, items, projectsFactory, listsFactory) {
 
-	$scope.items = items;
-	$scope.selected = {
-		item: $scope.items[0]
-	};
+		$scope.items = items;
+		$scope.selected = {
+			item: $scope.items[0]
+		};
 
-	$scope.createProject = function(){ 
-		
-		var newProject = new projectsFactory.model(this.newProject) 
+		$scope.createProject = function(){ 
+			
+			var newProject = new projectsFactory.model(this.newProject) 
 
-		// we created the newProject now we need to save it
-		// grab data from the server (returnData) and save it to the DB
-		newProject.$save(function(returnData){
-			// console.log('return', returnData)
-			projectsFactory.projects.push(returnData); // data from the server to show on client
-		})
+			// we created the newProject now we need to save it
+			// grab data from the server (returnData) and save it to the DB
+			newProject.$save(function(returnData){
+				// console.log('return', returnData)
+				projectsFactory.projects.push(returnData); // data from the server to show on client
+			})
 
-		console.log('newProject', newProject)
-		console.log('clicked')
+			console.log('newProject', newProject)
+			console.log('clicked')
 
-		$scope.newProject = {};
+			$scope.newProject = {};
 
-	 	$modalInstance.close($scope.selected.item);
+		 	$modalInstance.close($scope.selected.item);
 
-	}
-
-
-	$scope.createList = function(){ 
-		
-		var newList = new listsFactory.model(this.newShopList) 
-
-		newList.$save(function(returnData){
-			console.log('return', returnData)
-			listsFactory.lists.push(returnData); // data from the server to show on client
-		})
-
-		console.log('newShopList', newList)
-		console.log('clicked')
-
-		$scope.newlist = {};
-
-	 	$modalInstance.close($scope.selected.item);
-
-	}
+		}
 
 
-	$scope.cancel = function () {
-		$modalInstance.dismiss('cancel');
-	};
+		$scope.createList = function(){ 
+			
+			var newList = new listsFactory.model(this.newShopList) 
 
-	console.log("test")
+			newList.$save(function(returnData){
+				console.log('return', returnData)
+				listsFactory.lists.push(returnData); // data from the server to show on client
+			})
+
+			console.log('newShopList', newList)
+			console.log('clicked')
+
+			$scope.newlist = {};
+
+		 	$modalInstance.close($scope.selected.item);
+
+		}
+
+
+		$scope.cancel = function () {
+			$modalInstance.dismiss('cancel');
+		};
+
 		$scope.count = 0;
 		
-
 	});
+
+	// angular
+	// 	.module( 'orderlyApp' )
+	// 	app.directive( 'editInPlace', function() {
+	// 	  return {
+	// 	    restrict: 'E',
+	// 	    scope: { value: '=' },
+	// 	    template: '<span ng-click="edit()" ng-bind="value"></span><input ng-model="value"></input>',
+	// 	    link: function ( $scope, element, attrs ) {
+	// 	      // Let's get a reference to the input element, as we'll want to reference it.
+	// 	      var inputElement = angular.element( element.children()[1] );
+		      
+	// 	      // This directive should have a set class so we can style it.
+	// 	      element.addClass( 'edit-in-place' );
+		      
+	// 	      // Initially, we're not editing.
+	// 	      $scope.editing = false;
+		      
+	// 	      // ng-click handler to activate edit-in-place
+	// 	      $scope.edit = function () {
+	// 	        $scope.editing = true;
+		        
+	// 	        // We control display through a class on the directive itself. See the CSS.
+	// 	        element.addClass( 'active' );
+		        
+	// 	        // And we must focus the element. 
+	// 	        // `angular.element()` provides a chainable array, like jQuery so to access a native DOM function, 
+	// 	        // we have to reference the first element in the array.
+	// 	        inputElement[0].focus();
+	// 	      };
+		      
+	// 	      // When we leave the input, we're done editing.
+	// 	      inputElement.prop( 'onblur', function() {
+	// 	        $scope.editing = false;
+	// 	        element.removeClass( 'active' );
+	// 	      });
+	// 	    }
+	// 	  };
+	// 	});
 
 angular
 	.module( 'orderlyApp' )
@@ -237,6 +340,9 @@ angular
 
 
 	});
+
+
+
 
 
 

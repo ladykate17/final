@@ -23,7 +23,7 @@ var apiController = {
 	},
 
 	create 	: function(req, res){
-		req.body.tasks = req.body.tasks.split('\n');
+		// req.body.tasks = req.body.tasks.split('\n');
 		req.body.owner = req.user._id;
 		console.log(req.body)
 		var project = new ProjectBlock(req.body);

@@ -7,17 +7,29 @@ body{
 .login-page {
 	background:
 		linear-gradient(
-			rgba(40, 39, 47, 0.6), 
-			rgba(40, 39, 47, 0.6)
-    	), url('/images/desk-view.jpg');
+			rgba(40, 39, 47, 0.9), 
+			rgba(40, 39, 47, 0.9)
+    	), url('/images/desk-view-bw.png');
 	background-size: cover;
-	background-color: #800;
+	background-color: rgb(40, 39, 47);
+}
+
+.login-row-padding{
+	padding-top: 120px;
 }
 
 .login-block{
-	background-color: #FFF;
-	height: 40vh;
+	background-color: #BAB435;
+	height: 50vh;
 	padding: 20px;
+	-webkit-box-shadow: 0px 17px 26px -14px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 17px 26px -14px rgba(0,0,0,0.75);
+	box-shadow: 0px 17px 26px -14px rgba(0,0,0,0.75);
+}
+
+.welcome-title {
+	font-size: 50px;
+	font-weight: 300;
 }
 
 .text-col{
@@ -39,7 +51,7 @@ body{
 /*	background: 
 		linear-gradient(
 			rgba(40, 39, 47, 0.6), 
-			rgba(40, 39, 47, 0.6)
+			rgba(40, 39, 47, 0.6)find
     	), url('/images/bg1.jpg');*/
     background-size: cover;
 
@@ -125,8 +137,14 @@ body{
 }
 
 .max-height {
-	max-height: 75vh;
+	max-height: 76vh;
+	overflow: hidden;
+}
+
+.max-height:hover {
+	max-height: 76vh;
 	overflow: scroll;
+	overflow-x: hidden;
 }
 
 .budget-block {
@@ -134,17 +152,18 @@ body{
 }
 
 .inverse-title {
+	color: white;
 	font-size: 30px;
 	font-weight: 300;
 }
 
 .quote-block {
 	color: white;
-	padding: 30px 30px 40px;
+	padding: 30px 30px 50px;
 	background-color: #1790A1;
 	border: 2px solid white;
 	box-shadow: 0 0 0 15px #1790A1;
-	margin-top: 15px;
+	margin-top: 68px;
 }
 
 .quotations {
@@ -168,9 +187,25 @@ body{
 	margin-bottom: 20px;
 }
 
+.divider-inverse {
+	background-color: white;
+	height: 1px;
+	margin-bottom: 20px;
+}
+
 .sm-label {
 	color: #999;
 	font-size: 10px;
+	padding-bottom: 15px;
+}
+
+.budget-sm {
+	margin-bottom: 0px;
+}
+
+.budget-lg {
+	margin-bottom: 0px;
+	margin-top: 0px;
 }
 
 .sub-title{
@@ -195,9 +230,32 @@ body{
 
 .progress-bar {
 	background-color: #9B5383;
-	height: 12px;
+	height: 18px;
 }
 
 .progress {
-	height: 12px;
+	height: 18px;
+}
+
+/* list */
+.strike {
+    text-decoration: line-through;
+    color: #999;
+}
+
+/* edit in place */
+.edit-in-place span {
+  cursor: pointer;
+}
+
+.edit-in-place input {
+  display: none;
+}
+
+.edit-in-place.active span {
+  display: none;
+}
+
+.edit-in-place.active input {
+  display: inline-block;
 }

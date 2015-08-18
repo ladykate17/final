@@ -8,15 +8,33 @@
 
 		//- Budget & Profile? Column
 		.col-md-4
+			//- .date-block
+			//- 	h1.inverse-title {{date | date:'medium'}}
 			.budget-block
-				h2.inverse-title BUDGET
-				.divider
+				h2.inverse-title BUDGETS
+				.divider-inverse
+				.row.ex-pad2
+					.col-xs-6
+						p.sm-label total spent
+					.col-xs-6
+						h2.budget-lg.pull-right $1400.00
+				.row.ex-pad2
+					.col-xs-6
+						p.sm-label total budget
+					.col-xs-6
+						h2.budget-lg.pull-right {{total | currency : symbol : fractionSize }}
+				.row.ex-pad2
+					.col-xs-6
+						p.sm-label total remaining
+					.col-xs-6
+						h2.budget-lg.pull-right $400.00
 			.quote-block
 				p.quote
 					span.quotations " 
 					| The only time you should ever look back is to see how far you've come.
 					span.quotations.pull-right " 
 				p.author.pull-right - Unknown Author
+
 		//- Projects Column
 		.col-md-4.gutters
 			.row.form-group
@@ -27,14 +45,14 @@
 					accordion-group(ng-repeat="project in projects track by $index | orderBy:'-priority'" is-open="status.open") 
 						.row
 							.col-xs-6
-								h2 {{project.budget | currency : symbol : fractionSize }}
+								h2.budget-lg {{project.budget - project.task.taskCost | currency : symbol : fractionSize }}
 								p.sm-label remaining budget
 						.row
 							.col-xs-4
-								p {{project.budget | currency : symbol : fractionSize }}
+								p.budget-sm {{project.budget | currency : symbol : fractionSize }}
 								p.sm-label total budget
 							.col-xs-4
-								p {{project.budget | currency : symbol : fractionSize }}
+								p.budget-sm {{project.task.taskCost | currency : symbol : fractionSize }}
 								p.sm-label budget spent
 
 
@@ -43,24 +61,30 @@
 								.col-xs-5
 									p.sub-title TASKS
 								.col-xs-5
-									p.sub-title.pull-right COST
+									p.sub-title.pull-right SPENT
 							.col-xs-10.col-xs-offset-1.divider
+								p {{ getTotalCheckedItems(task) }}
 
 						.row(ng-repeat="task in project.tasks track by $index")
 							.col-xs-6.col-xs-offset-1
-								div.checkbox(ng-if="task")
-									<label><input ng-model="project.task.taskValue[task]" ng-true-value="1" ng-false-value="-1" ng-click="progress(project.task.taskValue[task])" type="checkbox" > {{task}} </label>
-									p {{project.task.taskValue[task]}}
-								div.input-group(ng-if="!task")
-									input.form-control(ng-model="task" placeholder="task")
-									.input-group-addon.btn-success(ng-click="pushTask(project, task)") ok
-									.input-group-addon.btn-danger(type="button" ng-click="project.tasks.splice($index)" aria-label="Remove") x
+								div.checkbox(ng-if="task.text" ng-model="task.complete")
+									<label><input ng-model="task.complete" ng-click="toggleChecked($index, project)"  type="checkbox" > {{task.text}} </label>
 							.col-xs-4
-								.form-group
-									input.form-control(placeholder="$0.00")
+								edit-in-place(value="project.task.taskCost") {{task.taskCost | currency : symbol : fractionSize}}
+								//- p {{task.taskCost | currency : symbol : fractionSize}}
+
+							//-{{project.task.taskValue[task]}} 
+							//-ng-click="progress(project.task.taskValue[task])"
+							.row(ng-if="!task.text")
+								.col-xs-10.col-xs-offset-1
+									div.input-group
+										input.form-control(ng-model="task.text" placeholder="task")
+										.input-group-addon.btn-success(ng-click="pushTask(project, task)") ok
+										.input-group-addon.btn-danger(type="button" ng-click="project.tasks.splice($index, 1)" aria-label="Remove") x
+
 						.row.ex-pad-sm
 							.col-xs-10.col-xs-offset-1
-								button.btn.add-btn-custom(type="button" ng-click="addProjectTask(project)") add another task
+								button.btn.add-btn-custom(type="button" ng-click="addProjectTask(project)") add task
 
 						.row.ex-pad-sm
 							.col-xs-10.col-xs-offset-1
@@ -69,8 +93,8 @@
 										button.btn.delete-link(type="button" ng-click="projects.splice($index, 1)" aria-label="Remove") Remove Project
 
 
-								//- .col-xs-1
-									//- button.btn.btn-danger(type="button" ng-click="newProject.task.splice($index, 1)" aria-label="Remove") x
+						//- .col-xs-1
+							//- button.btn.btn-danger(type="button" ng-click="newProject.task.splice($index, 1)" aria-label="Remove") x
 
 						accordion-heading
 							.row
@@ -80,8 +104,8 @@
 									i.pull-right.ex-pad.glyphicon(ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}")
 							.row
 								.col-xs-12
-									progressbar(max="project.tasks.length" value="progress(project.task.taskValue[task])" class="bar-custom")
-										span(style='color:white; white-space:nowrap;') {{project.tasks.completedTasks}}%
+									progressbar(max="project.tasks.length" value="progress(getTotalCheckedItems(task.complete.length))" class="bar-custom")
+										span(style='color:white; white-space:nowrap; font-size:11px;') {{ (getTotalCheckedItems(task)/project.tasks.length)*100 | number:0 }}%
 
 
 
@@ -92,7 +116,7 @@
 			.row.form-group
 				button.btn.btn-custom-list(type="button" ng-click="openList()") add shopping list
 
-			.row
+			.row.max-height
 				accordion(close-others="oneAtATime" )
 					accordion-group(ng-repeat="list in lists track by $index" is-open="status.open") 
 						.row
@@ -101,14 +125,14 @@
 							.col-xs-10.col-xs-offset-1.divider
 						.row(ng-repeat="item in list.items track by $index")
 							.col-xs-10.col-xs-offset-1
-								div(ng-if="item") - {{item}}
-								div.input-group(ng-if="!item")
-									input.form-control(ng-model="item" placeholder="item")
+								div.btn(ng-class="{strike: item.isCrossedOff}" ng-if="item.text" ng-click="activateButton($index, item)") - {{item.text}}
+								div.input-group(ng-if="!item.text")
+									input.form-control(ng-model="item.text" placeholder="item")
 									.input-group-addon.btn-success(ng-click="pushItem(list, item)") ok
 									.input-group-addon.btn-danger(type="button" ng-click="list.items.splice($index)" aria-label="Remove") x
 						.row.ex-pad-sm
 							.col-xs-10.col-xs-offset-1
-								button.btn.add-btn-custom(type="button" ng-click="addListItem(list)") add another item
+								button.btn.add-btn-custom(type="button" ng-click="addListItem(list)") add item
 						.row.ex-pad-sm
 							.col-xs-10.col-xs-offset-1
 								ul.nav
