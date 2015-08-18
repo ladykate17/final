@@ -70,7 +70,7 @@
 								div.checkbox(ng-if="task.text" ng-model="task.complete")
 									<label><input ng-model="task.complete" ng-click="toggleChecked($index, project)"  type="checkbox" > {{task.text}} </label>
 							.col-xs-4
-								edit-in-place(value="project.task.taskCost") {{task.taskCost | currency : symbol : fractionSize}}
+								edit-in-place(ng-click="editInPlace(task.taskCost)" value="task.taskCost")
 								//- p {{task.taskCost | currency : symbol : fractionSize}}
 
 							//-{{project.task.taskValue[task]}} 
