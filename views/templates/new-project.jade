@@ -6,7 +6,7 @@ script(type='text/ng-template', id='new-project.jade')
 		//- .col-sm-9.col-md-7.col-lg-6
 		form(ng-submit="createProject()") 
 			.form-group
-				input.form-control(ng-model="newProject.name" placeholder="name")
+				input.form-control(ng-model="newProject.name" placeholder="Name")
 
 			.form-group
 				select.form-control(ng-model="newProject.priority" ng-options="option.val as option.name for option in [{ name: 'High Priority', val : 3 }, { name: 'Medium Priority', val : 2 }, { name: 'Low Priority', val: 1 }]")
@@ -14,20 +14,14 @@ script(type='text/ng-template', id='new-project.jade')
 			
 			.form-group.input-group
 				.input-group-addon $
-				input.form-control(ng-model="newProject.budget" placeholder="budget")
+				input.form-control(ng-model="newProject.budget" placeholder="Budget")
 				.input-group-addon .00
 
-			//- .form-group
-			//- 	input.form-control(ng-model="newProject.tasks" placeholder="task")
+			.form-group
+				textarea.form-control(rows="6" ng-model="newProject.tasks" placeholder="Tasks (One task per line)\nTask 1\nTask 2\nTask 3")
 
-			.form-group.input-group(ng-repeat="item in newProject.tasks")
-				input.form-control(ng-model="item.tasks" placeholder="task")
-				.input-group-addon.btn-danger(type="button" ng-click="newProject.tasks.splice($index, 1)" aria-label="Remove") x
 
 			.form-group
-				button.btn(type="button" ng-click="addfield()") add another task
-
-			.form-group
-				input.btn(type="submit" ng-click="ok()")
-				//- input.btn.btn-warning(type="button" ng-click="cancel()") cancel
+				button.btn.cancel-btn(type="button" ng-click="cancel()" ) cancel
+				button.btn.success-btn.pull-right(type="submit") submit
 

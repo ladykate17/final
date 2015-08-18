@@ -1,0 +1,28 @@
+script(type='text/ng-template', id='new-shop-list.jade')
+.modal-content
+	.modal-body
+		h1 New Shopping List:
+
+		//- .col-sm-9.col-md-7.col-lg-6
+		form(ng-submit="createList()") 
+			.form-group
+				input.form-control(ng-model="newShopList.name" placeholder="Store Name")
+
+			.form-group.input-group
+				.input-group-addon $
+				input.form-control(ng-model="newShopList.budget" placeholder="Budget")
+				.input-group-addon .00
+
+			.form-group
+				textarea.form-control(rows="6" ng-model="newShopList.items" placeholder="Items to buy (One task per line)\nItem 1\nItem 2\nItem 3")
+
+			//- .form-group.input-group(ng-repeat="item in newShopList.items")
+			//- 	input.form-control(ng-model="item.items" placeholder="task")
+			//- 	.input-group-addon.btn-danger(type="button" ng-click="newShopList.items.splice($index, 1)" aria-label="Remove") x
+
+			//- .form-group
+			//- 	button.btn(type="button" ng-click="addfield()") add another task
+
+			.form-group
+				button.btn.cancel-btn(type="button" ng-click="cancel()" ) cancel
+				button.btn.success-btn.pull-right(type="submit") submit

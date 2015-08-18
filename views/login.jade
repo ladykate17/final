@@ -1,0 +1,48 @@
+doctype html
+html(lang='en')
+	head
+		meta(charset="utf-8")
+		link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css", rel="stylesheet")
+		link(href="/css/main.css", rel="stylesheet")
+		title ORDERLY
+
+	body.login-page
+		.container-fluid
+			.row
+				.col-md-6.text-col
+					.col-md-8.col-md-offset-2.text-center
+						h1.text-col orderly
+						p The tidy to-do list and project manager that keeps you on task and on budget! This clean app will help you increase productivity by keeping all your shopping and project lists logically organzized and all in one place.
+				.col-md-6
+					.col-md-9.login-block
+
+						//- Form for handling existing user logins.
+						h1 Sign In
+						form(action="/auth/login", method="post")
+							.form-group
+								input.form-control(type="text", name="username", placeholder="Username")
+							.form-group
+								input.form-control(type="password", name="password", placeholder="Password")
+							.form-group
+								input.form-control(type="submit")
+
+						p No Account? Sign up.
+
+						//- Form for allowing new users to register.
+						h1 Register
+						form.form-group(action="/auth/signup", method="post")
+							.form-group
+								input.form-control(type="text", name="username", placeholder="Username")
+							.form-group
+								input.form-control(type="email", name="email", placeholder="Email")
+							.form-group
+								input.form-control(type="password", name="password", placeholder="Password")
+							.form-group
+								input.form-control(type="submit")
+			
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular.js")
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.3/ui-bootstrap-tpls.min.js")
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular-route.js")
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular-animate.js")
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular-resource.js")
+		script(src="/js/main.js")

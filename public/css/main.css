@@ -1,5 +1,203 @@
-@import url(http://fonts.googleapis.com/css?family=Lato:400,300,700);
+@import url(http://fonts.googleapis.com/css?family=Lato:400,300italic,300,700);
 
 body{
 	font-family:'Lato', sans-serif;
+}
+
+.login-page {
+	background:
+		linear-gradient(
+			rgba(40, 39, 47, 0.6), 
+			rgba(40, 39, 47, 0.6)
+    	), url('/images/desk-view.jpg');
+	background-size: cover;
+	background-color: #800;
+}
+
+.login-block{
+	background-color: #FFF;
+	height: 40vh;
+	padding: 20px;
+}
+
+.text-col{
+	font-weight: 300;
+	color: white;
+}
+
+.row-spacing {
+	padding: 0px 0px;
+}
+
+.nav-gutter {
+	border-top: 10px solid transparent;
+	border-bottom: 20px solid transparent;
+}
+
+.main-page {
+	background: url('/images/bg1.jpg');
+/*	background: 
+		linear-gradient(
+			rgba(40, 39, 47, 0.6), 
+			rgba(40, 39, 47, 0.6)
+    	), url('/images/bg1.jpg');*/
+    background-size: cover;
+
+}
+
+.success-btn {
+	color: white;
+    background-color: #BAB435;
+}
+
+.success-btn:hover {
+	color: white;
+    background-color: #8D911F;
+}
+
+.cancel-btn {
+    background-color: #ccc;
+}
+
+.cancel-btn:hover {
+    background-color: #d9534f;
+    color: white;
+}
+
+.add-btn-custom {
+	color: white;
+	border-radius: 0px;
+    width: 100%;
+    background-color: #1790A1;
+}
+
+.btn-custom-project {
+	color: white;
+	border-radius: 0px;
+    width: 100%;
+    background-color: #BAB435;
+}
+
+.btn-custom-list {
+	color: white;
+	border-radius: 0px;
+    width: 100%;
+    background-color: #1E7F78;
+}
+
+.delete-link {
+	background: transparent;
+	color: #999;
+	width: 100%;
+}
+
+.delete-link:hover {
+	color: white;
+	border-radius: 0px;
+	width: 100%;
+    background-color: #d9534f;
+}
+
+.title {
+	font-weight: 300;
+}
+
+.panel-body{
+	padding-top: 0px;
+}
+
+.panel-group .panel {
+	border-radius: 0px;
+}
+
+.panel-default>.panel-heading {
+	background-color: white;
+	border: 4px;
+}
+
+.panel-group .panel-heading+.panel-collapse>.list-group, .panel-group .panel-heading+.panel-collapse>.panel-body{
+	border: none;	
+}
+
+.gutters {
+	border-right: 15px solid transparent;
+	border-left: 15px solid transparent;
+}
+
+.max-height {
+	max-height: 75vh;
+	overflow: scroll;
+}
+
+.budget-block {
+	color: white;
+}
+
+.inverse-title {
+	font-size: 30px;
+	font-weight: 300;
+}
+
+.quote-block {
+	color: white;
+	padding: 30px 30px 40px;
+	background-color: #1790A1;
+	border: 2px solid white;
+	box-shadow: 0 0 0 15px #1790A1;
+	margin-top: 15px;
+}
+
+.quotations {
+	font-weight: bold;
+	font-size: 36px;
+}
+
+.quote {
+	font-weight: 300;
+	font-size: 28px;
+	line-height: 30px;
+}
+.author {
+	font-weight: 300;
+	font-style: italic;
+}
+
+.divider {
+	background-color: black;
+	height: 1px;
+	margin-bottom: 20px;
+}
+
+.sm-label {
+	color: #999;
+	font-size: 10px;
+}
+
+.sub-title{
+	font-weight: bold;
+}
+
+.bar-custom{
+	border-radius: 0px;
+}
+
+.ex-pad-sm {
+	padding-top: 20px;
+}
+
+.ex-pad {
+	padding-top: 27px;
+}
+
+.ex-pad2 {
+	padding-top: 18px;
+}
+
+.progress-bar {
+	background-color: #9B5383;
+	height: 12px;
+}
+
+.progress {
+	height: 12px;
 }
