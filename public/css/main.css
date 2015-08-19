@@ -250,6 +250,7 @@ body{
 }
 .active{
     text-decoration: line-through;
+    color: #999;
 }
 
 /* list */

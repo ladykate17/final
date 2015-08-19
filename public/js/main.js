@@ -176,7 +176,6 @@ angular
 			var count = num + valueInt
 
 		}
-
 		
 
 	    // Item List Arrays
@@ -198,13 +197,20 @@ angular
 	    };
 
 	    // Add Item to Checked List and delete from Unchecked List
-	    $scope.toggleChecked = function (index, project) {
+	    $scope.toggleCheckedProj = function (index, project) {
 	        $scope.checked.push($scope.unChecked[index]);
-	    	console.log('hello?', $scope.checked)
+	    	console.log('checked?', $scope.active_status)
 	        $scope.unChecked.splice(index, 1);
 	        project.$save()
 	    };
 
+
+	    $scope.toggleCheckedList = function (index, list) {
+	        $scope.checked.push($scope.unChecked[index]);
+	    	console.log('hello?', $scope.checked)
+	        $scope.unChecked.splice(index, 1);
+	        list.$save()
+	    };
 
 	    // Get Total Items
 	    $scope.getTotalItems = function () {
@@ -282,13 +288,9 @@ angular
 				
 			}
 
-
-
-
 		}, 500);
 
-
-	});
+});
 
 
 
@@ -417,6 +419,8 @@ angular
 
 
 	});
+
+
 
 
 

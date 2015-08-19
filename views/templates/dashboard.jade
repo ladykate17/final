@@ -68,7 +68,7 @@
 						.row(ng-repeat="task in project.tasks track by $index")
 							.col-xs-6.col-xs-offset-1
 								div.checkbox(ng-if="task.text" ng-model="task.complete")
-									<label><input ng-model="task.complete" ng-click="toggleChecked($index, project)"  type="checkbox" > {{task.text}} </label>
+									<label ng-class="{'active': task.complete}"><input ng-model="task.complete" ng-click="toggleCheckedProj($index, project)"  type="checkbox" > {{task.text}} </label>
 							//- .col-xs-4
 							//- 	edit-in-place(ng-click="editInPlace(task.taskCost)" value="task.taskCost")
 								//- p {{task.taskCost | currency : symbol : fractionSize}}
@@ -127,9 +127,16 @@
 							.col-xs-offset-1
 								p.sub-title ITEMS
 							.col-xs-10.col-xs-offset-1.divider
+						.row(ng-repeat="task in project.tasks track by $index")
+							.col-xs-6.col-xs-offset-1
+								div.checkbox(ng-if="task.text" ng-model="task.complete")
+									<label ng-class="{'active': task.complete}"><input ng-model="task.complete" ng-click="toggleCheckedProj($index, project)"  type="checkbox" > {{task.text}} </label>
+
 						.row(ng-repeat="item in list.items track by $index")
 							.col-xs-10.col-xs-offset-1
-								.btn(ng-class="{strike: item.text.isCrossedOff}" ng-if="item.text" ng-click="activateButton($index, item)") - {{item.text}}
+								div.checkbox(ng-if="item.text" ng-model="item.complete")
+									<label ng-class="{'active': item.complete}"><input ng-model="item.complete" ng-click="toggleCheckedList($index, list)"  type="checkbox" > {{item.text}} </label>
+	
 								.input-group(ng-if="!item.text")
 									input.form-control(ng-model="item.text" placeholder="item")
 									.input-group-addon.btn-success(ng-click="pushItem(list, item)") ok
@@ -154,14 +161,4 @@
 									i.pull-right.glyphicon.ex-pad2(ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}")
 
 
-			//- .row(ng-repeat="list in lists")
-			//- 	.list-block
-			//- 		h2 {{list.name}}
-			//- 		p {{list.budget | currency : symbol : fractionSize}}
-			//- 		.row(ng-repeat="item in list.items")
-			//- 			.col-xs-8
-			//- 				div(ng-if="item") - {{item}}
-			//- 				div(ng-if="!item")
-			//- 					input.form-control(ng-model="item" placeholder="item")
-			//- 					.input-group-addon.btn-danger(type="button" ng-click="list.item.splice($index, 1)" aria-label="Remove") x
 			
