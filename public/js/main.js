@@ -4,7 +4,6 @@ angular
 		'ngRoute',
 		'ngAnimate',
 		'ui.bootstrap',
-		'angular-svg-round-progress'
 	]); 
 
 

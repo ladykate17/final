@@ -9,13 +9,13 @@ var listApiController = {
 
 		if(requestID){
 			//ONE list
-			ListBlock.findOne({_id : requestID}, function(err, list){ // find by _id that matches requestID
+			ListBlock.findOne({_id : requestID, owner : req.user._i}, function(err, list){ // find by _id that matches requestID
 				res.send(list)
 			})
 		}
 		else{
 			//ALL lists
-			ListBlock.find({}, function(err, lists){ //mongoose find() always returns an array
+			ListBlock.find({owner : req.user._id}, function(err, lists){ //mongoose find() always returns an array
 				res.send(lists)
 			})
 		}

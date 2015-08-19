@@ -7,7 +7,7 @@ html(lang='en' )
 		title ORDERLY
 
 	body.login-page
-		.container-fluid(ng-controller="ModalCtrl")
+		.container-fluid
 			.row.login-row-padding
 				.col-md-6.text-col
 					.col-md-7.col-md-offset-4.text-center.text-col
@@ -38,17 +38,16 @@ html(lang='en' )
 			.modal-dialog(role="document")
 				.modal-content
 					.modal-body
-						Form
-							h1 Sign Up
-							form.form-group(action="/auth/signup", method="post")
-								.form-group
-									input.form-control(type="text", name="username", placeholder="Username")
-								.form-group
-									input.form-control(type="email", name="email", placeholder="Email")
-								.form-group
-									input.form-control(type="password", name="password", placeholder="Password")
-								.form-group
-									input.form-control.btn.success-btn(type="submit")
+						h1 Sign Up
+						form.form-group(action="/auth/signup", method="post")
+							.form-group
+								input.form-control(type="text", name="username", placeholder="Username")
+							.form-group
+								input.form-control(type="email", name="email", placeholder="Email")
+							.form-group
+								input.form-control(type="password", name="password", placeholder="Password")
+							.form-group
+								input.form-control.btn.success-btn(type="submit")
 
 		script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js")
 		script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js")
