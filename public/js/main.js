@@ -259,10 +259,10 @@ angular
 
 		// 	return result
 		// }
-		$scope.$watch('projects', function() {
-			$scope.projectBudgetTotals()
-			$scope.listBudgetTotals()
-	   });
+		// $scope.$watch('projects', function() {
+		// 	$scope.projectBudgetTotals()
+		// 	$scope.listBudgetTotals()
+	 //   });
 
 		$scope.projectBudgetTotals = function(project, budget) {
 				$scope.totalProj = 0;
@@ -310,7 +310,7 @@ angular
 
 			
 
-		}, 1500);
+		}, 2000);
 
 
 });

@@ -1,14 +1,14 @@
 .container-fluid
 	//-for demo only
 	//- .row
-	//- 	.col-md-4
+	//- 	.col-sm-4
 	//- 		div.my-progress(round-progress max="max" current="current" color="#45ccce" bgcolor="#eaeaea" radius="100" stroke="10" semi="false" rounded="false" clockwise="false" responsive="true" iterations="100" animation="easeInOutQuart")
 	//- 	.col-md-4
 	//- 	.col-md-4
 	.row(ng-controller="ModalCtrl")
 
 		//- Budget & Profile? Column
-		.col-md-4
+		.col-sm-4
 			//- .date-block
 			//- 	h1.inverse-title {{date | date:'medium'}}
 			.budget-block
@@ -37,7 +37,7 @@
 				p.author.pull-right - Unknown Author
 
 		//- Projects Column
-		.col-md-4.gutters
+		.col-sm-4.gutters
 			.row.form-group
 				button#updateData.btn.btn-custom-project(type="button" ng-click="openProject()") add project
 
@@ -112,7 +112,7 @@
 
 
 		//- Shopping Lists & Quote Column
-		.col-md-4
+		.col-sm-4
 			
 			.row.form-group
 				button.btn.btn-custom-list(type="button" ng-click="openList()") add shopping list
