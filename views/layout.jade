@@ -6,7 +6,9 @@ html(lang='en' ng-app="orderlyApp")
 		link(href="css/main.css", rel="stylesheet")
 		title ORDERLY
 
-	body.main-page
+	body.main-page(ng-controller="ModalCtrl")
+		button.btn.built-with(type="button" ng-click="openBuiltWith()") 
+
 		.container
 			.row.row-spacing
 			.row.nav-gutter

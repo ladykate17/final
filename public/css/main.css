@@ -201,13 +201,13 @@ body{
 
 .sm-label {
 	color: #999;
-	font-size: 11px;
+	font-size: 12px;
 	padding-bottom: 15px;
 }
 
 .sm-label-budget {
 	color: #999;
-	font-size: 11px;
+	font-size: 12px;
 	padding-top: 8px;
 }
 
@@ -248,6 +248,7 @@ body{
 .progress {
 	height: 18px;
 }
+
 .active{
     text-decoration: line-through;
     color: #999;
@@ -275,3 +276,19 @@ body{
 .edit-in-place.active input {
   display: inline-block;
 }
+
+.logos{
+	width: 590px;
+	padding-left: 5px;
+}
+
+.built-with{
+/*	position: absolute;
+	z-index: 1;
+*/	background-color: transparent;
+}
+
+.built-with:hover{
+	background-color: #999;
+}
+
