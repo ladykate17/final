@@ -48,7 +48,7 @@ angular
 // controller
 angular
 	.module( 'orderlyApp' )
-	.controller('projectList', function($scope, projectsFactory, listsFactory){ // (, projectsFactory )first controller arg comes from the controller property on the $routeProvider above
+	.controller('projectList', function ($scope, projectsFactory, listsFactory){ // (, projectsFactory )first controller arg comes from the controller property on the $routeProvider above
 	// console.log($scope)
 	// console.log('controller', projectsFactory);
 
@@ -238,8 +238,68 @@ angular
 
 		// 	return result
 		// }
+		$scope.$watch('projects', function() {
+			$scope.projectBudgetTotals()
+			$scope.listBudgetTotals()
+	   });
+
+		$scope.projectBudgetTotals = function(project, budget) {
+				$scope.totalProj = 0;
+				console.log($scope.total)
+
+				for (i = 0; i < $scope.projects.length; i++){
+					var budget = $scope.projects[i].budget
+					$scope.totalProj += budget
+					console.log($scope.totalProj)
+				}
+				
+			}
+		$scope.listBudgetTotals = function(list, budget) {
+				$scope.totalShop = 0;
+				// console.log($scope.total)
+
+				for (i = 0; i < $scope.lists.length; i++){
+					var budget = $scope.lists[i].budget
+					$scope.totalShop += budget
+					// console.log($scope.totalShop)
+				}
+
+			}
+		$scope.projectBudgetRemain = function(project, taskCost) {
+				$scope.total = 0;
+				// console.log($scope.total)
+
+				var tasks = $scope.projects.tasks
+
+				for (i = 0; i < tasks.length; i++){
+					var budgetRemain = $scope.tasks[i].taskCost
+					$scope.total += taskCost
+					// console.log('taskCost', $scope.total)
+				}
+				
+			}
 		$timeout(function() {
 			
+			
+			$scope.projectBudgetTotals()
+
+			
+		    $scope.listBudgetTotals()
+
+
+			
+
+		}, 500);
+
+
+});
+
+
+
+angular
+	.module( 'orderlyApp' )
+	.controller('ModalInstanceCtrl', function ($scope, $modalInstance, items, projectsFactory, listsFactory) {
+
 			$scope.projectBudgetTotals = function(project, budget) {
 				$scope.totalProj = 0;
 				console.log($scope.total)
@@ -250,53 +310,34 @@ angular
 					console.log($scope.totalProj)
 				}
 
-				
 			}
-			$scope.projectBudgetTotals()
-
-			$scope.$watch('totalShop', function() {
+			
 
 			$scope.listBudgetTotals = function(list, budget) {
 				$scope.totalShop = 0;
-				console.log($scope.total)
+				// console.log($scope.total)
 
 				for (i = 0; i < $scope.lists.length; i++){
 					var budget = $scope.lists[i].budget
 					$scope.totalShop += budget
-					console.log($scope.totalShop)
+					// console.log($scope.totalShop)
 				}
-
-				
 			}
-		       $scope.listBudgetTotals()
-		       // alert('hey, totalShop has changed!');
-   			});
 
 
 			$scope.projectBudgetRemain = function(project, taskCost) {
 				$scope.total = 0;
-				console.log($scope.total)
+				// console.log($scope.total)
 
 				var tasks = $scope.projects.tasks
 
 				for (i = 0; i < tasks.length; i++){
 					var budgetRemain = $scope.tasks[i].taskCost
 					$scope.total += taskCost
-					console.log('taskCost', $scope.total)
+					// console.log('taskCost', $scope.total)
 				}
-
-				
 			}
 
-		}, 500);
-
-});
-
-
-
-angular
-	.module( 'orderlyApp' )
-	.controller('ModalInstanceCtrl', function ($scope, $modalInstance, items, projectsFactory, listsFactory) {
 
 		$scope.items = items;
 		$scope.selected = {
@@ -320,7 +361,8 @@ angular
 			$scope.newProject = {};
 
 		 	$modalInstance.close($scope.selected.item);
-
+		 	// $scope.projectBudgetTotals()
+		 	// $scope.listBudgetTotals()
 		}
 
 
@@ -348,6 +390,7 @@ angular
 		};
 
 		$scope.count = 0;
+
 
 
 		
