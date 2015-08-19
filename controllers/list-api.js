@@ -23,7 +23,7 @@ var listApiController = {
 	},
 
 	create 	: function(req, res){
-		req.body.items = req.body.items.split('\n');
+		// req.body.items = req.body.items.split('\n');
 
 		console.log(req.body)
 		req.body.owner = req.user._id;
@@ -34,12 +34,12 @@ var listApiController = {
 	},
 
 	update: function(req, res){
-		var task = ListBlock.findOne( { _id : req.params._id} )
-		console.log(req.body)
-		task.update(req.body)
-		.then(function(){
-			console.log("list item added!!!!!!")
-		})
+		ListBlock.update( { _id : req.body._id}, req.body, function(err, update){
+			ListBlock.findOne( { _id : req.body._id}, function(err, doc){
+				res.send(doc)
+			})
+		});
+			console.log("list item updated!!!!!!")
 	},
 
 	delete 	: function(req, res){

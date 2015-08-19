@@ -4,6 +4,10 @@ body{
 	font-family:'Lato', sans-serif;
 }
 
+.brand {
+	margin-top: 3px;
+}
+
 .login-page {
 	background:
 		linear-gradient(
@@ -152,6 +156,7 @@ body{
 }
 
 .inverse-title {
+	margin-top: 0px;
 	color: white;
 	font-size: 30px;
 	font-weight: 300;
@@ -195,8 +200,14 @@ body{
 
 .sm-label {
 	color: #999;
-	font-size: 10px;
+	font-size: 11px;
 	padding-bottom: 15px;
+}
+
+.sm-label-budget {
+	color: #999;
+	font-size: 11px;
+	padding-top: 8px;
 }
 
 .budget-sm {
@@ -235,6 +246,9 @@ body{
 
 .progress {
 	height: 18px;
+}
+.active{
+    text-decoration: line-through;
 }
 
 /* list */

@@ -197,10 +197,10 @@ angular
 	    };
 
 	
-		console.log("working?")
 		$scope.isCrossedOff = false;
-			$scope.activateButton = function(index, item) {
-				items.isCrossedOff = items.isCrossedOff;
+		console.log("working?")
+			$scope.activateButton = function($scope, index, item) {
+				item.isCrossedOff = !item.isCrossedOff;
 			}  
 		
 		// $scope.tasksTotal = function() {
@@ -215,21 +215,58 @@ angular
 		$timeout(function() {
 			
 			$scope.projectBudgetTotals = function(project, budget) {
-				$scope.total = 0;
+				$scope.totalProj = 0;
 				console.log($scope.total)
 
 				for (i = 0; i < $scope.projects.length; i++){
 					var budget = $scope.projects[i].budget
-					$scope.total += budget
-					console.log($scope.total)
+					$scope.totalProj += budget
+					console.log($scope.totalProj)
+				}
+
+				
+			}
+			$scope.projectBudgetTotals()
+
+			$scope.$watch('totalShop', function() {
+
+			$scope.listBudgetTotals = function(list, budget) {
+				$scope.totalShop = 0;
+				console.log($scope.total)
+
+				for (i = 0; i < $scope.lists.length; i++){
+					var budget = $scope.lists[i].budget
+					$scope.totalShop += budget
+					console.log($scope.totalShop)
+				}
+
+				
+			}
+		       $scope.listBudgetTotals()
+		       // alert('hey, totalShop has changed!');
+   			});
+
+
+			$scope.projectBudgetRemain = function(project, taskCost) {
+				$scope.total = 0;
+				console.log($scope.total)
+
+				var tasks = $scope.projects.tasks
+
+				for (i = 0; i < tasks.length; i++){
+					var budgetRemain = $scope.tasks[i].taskCost
+					$scope.total += taskCost
+					console.log('taskCost', $scope.total)
 				}
 
 				
 			}
 
-			$scope.projectBudgetTotals()
+
+
 
 		}, 500);
+
 
 	});
 
@@ -300,8 +337,8 @@ angular
 		  return {
 		    restrict: 'E',
 		    scope: { value: '=' },
-		    template: '<span ng-click="edit()" ng-bind="value"></span><input ng-model="value"></input>',
-		    link: function ( $scope, element, attrs ) {
+		    template: '<span ng-click="edit()" ng-bind="value"></span><input class="form-control" ng-model="value"></input>',
+		    link: function ( $scope, element, attrs, project ) {
 		      // Let's get a reference to the input element, as we'll want to reference it.
 		      var inputElement = angular.element( element.children()[1] );
 		      
@@ -332,12 +369,26 @@ angular
 		        $scope.editing = false;
 		        element.removeClass( 'active' );
 		        
+		        // $http.post('', project.$save(element.text())
 		      });
 			    // project.$save()
 		    }
 		  };
 		});
 
+// angular
+// 	.module( 'orderlyApp' )
+// 	.directive('myCheckbox', function() {
+
+// 	        return{
+// 	            restrict: 'E',
+// 	            template: '<label class="checkbox-inline btn col-md-12" ng-class="{active : isChecked}"><input type="checkbox" id="inlineCheckbox1" value="option1" ng-model="isChecked" />{{task.text}}</label>',
+// 	            replace: true,
+// 	            scope: {
+// 	                text: '@'
+// 	            }
+// 	        };
+// });
 angular
 	.module( 'orderlyApp' )
 	.controller('ProgressCtrl', function ($scope) {

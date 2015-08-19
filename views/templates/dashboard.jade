@@ -15,19 +15,19 @@
 				.divider-inverse
 				.row.ex-pad2
 					.col-xs-6
-						p.sm-label total spent
+						p.sm-label-budget total project budget
 					.col-xs-6
-						h2.budget-lg.pull-right $1400.00
+						h2.budget-lg.pull-right {{totalProj | currency : symbol : fractionSize }}
 				.row.ex-pad2
 					.col-xs-6
-						p.sm-label total budget
+						p.sm-label-budget total shopping budget
 					.col-xs-6
-						h2.budget-lg.pull-right {{total | currency : symbol : fractionSize }}
+						h2.budget-lg.pull-right {{totalShop | currency : symbol : fractionSize }}
 				.row.ex-pad2
 					.col-xs-6
-						p.sm-label total remaining
+						p.sm-label-budget total budget
 					.col-xs-6
-						h2.budget-lg.pull-right $400.00
+						h2.budget-lg.pull-right {{totalShop+totalProj | currency : symbol : fractionSize }}
 			.quote-block
 				p.quote
 					span.quotations " 
@@ -45,32 +45,32 @@
 					accordion-group(ng-repeat="project in projects track by $index | orderBy:'-priority'" is-open="status.open") 
 						.row
 							.col-xs-6
-								h2.budget-lg {{project.budget - project.task.taskCost | currency : symbol : fractionSize }}
-								p.sm-label remaining budget
-						.row
-							.col-xs-4
-								p.budget-sm {{project.budget | currency : symbol : fractionSize }}
-								p.sm-label total budget
-							.col-xs-4
-								p.budget-sm {{project.task.taskCost | currency : symbol : fractionSize }}
-								p.sm-label budget spent
+								h2.budget-lg {{project.budget | currency : symbol : fractionSize }}
+								p.sm-label budget
+						//- .row
+						//- 	.col-xs-4
+						//- 		p.budget-sm {{project.budget | currency : symbol : fractionSize }}
+						//- 		p.sm-label total budget
+						//- 	.col-xs-4
+						//- 		p.budget-sm {{project.task.taskCost | currency : symbol : fractionSize }}
+						//- 		p.sm-label budget spent
 
 
 						.row
 							.col-xs-offset-1
 								.col-xs-5
 									p.sub-title TASKS
-								.col-xs-5
-									p.sub-title.pull-right SPENT
+								//- .col-xs-5
+								//- 	p.sub-title.pull-right SPENT
 							.col-xs-10.col-xs-offset-1.divider
-								p {{ getTotalCheckedItems(task) }}
+								//- p {{ getTotalCheckedItems(task) }}
 
 						.row(ng-repeat="task in project.tasks track by $index")
 							.col-xs-6.col-xs-offset-1
 								div.checkbox(ng-if="task.text" ng-model="task.complete")
 									<label><input ng-model="task.complete" ng-click="toggleChecked($index, project)"  type="checkbox" > {{task.text}} </label>
-							.col-xs-4
-								edit-in-place(ng-click="editInPlace(task.taskCost)" value="task.taskCost")
+							//- .col-xs-4
+							//- 	edit-in-place(ng-click="editInPlace(task.taskCost)" value="task.taskCost")
 								//- p {{task.taskCost | currency : symbol : fractionSize}}
 
 							//-{{project.task.taskValue[task]}} 
@@ -102,10 +102,10 @@
 									h2.title {{project.name}}
 								.col-xs-6
 									i.pull-right.ex-pad.glyphicon(ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}")
-							.row
-								.col-xs-12
-									progressbar(max="project.tasks.length" value="progress(getTotalCheckedItems(task.complete.length))" class="bar-custom")
-										span(style='color:white; white-space:nowrap; font-size:11px;') {{ (getTotalCheckedItems(task)/project.tasks.length)*100 | number:0 }}%
+							//- .row
+							//- 	.col-xs-12
+							//- 		progressbar(max="project.tasks.length" value="progress(getTotalCheckedItems(task.complete.length))" class="bar-custom")
+							//- 			span(style='color: rgba(255, 255, 255, 0.7); white-space:nowrap; font-size:11px;') {{ (getTotalCheckedItems(task)/project.tasks.complete.length)*100 | number:0 }}%
 
 
 
@@ -120,13 +120,17 @@
 				accordion(close-others="oneAtATime" )
 					accordion-group(ng-repeat="list in lists track by $index" is-open="status.open") 
 						.row
+							.col-xs-6
+								h2.budget-lg {{list.budget | currency : symbol : fractionSize }}
+								p.sm-label budget
+						.row
 							.col-xs-offset-1
 								p.sub-title ITEMS
 							.col-xs-10.col-xs-offset-1.divider
 						.row(ng-repeat="item in list.items track by $index")
 							.col-xs-10.col-xs-offset-1
-								div.btn(ng-class="{strike: item.isCrossedOff}" ng-if="item.text" ng-click="activateButton($index, item)") - {{item.text}}
-								div.input-group(ng-if="!item.text")
+								.btn(ng-class="{strike: item.text.isCrossedOff}" ng-if="item.text" ng-click="activateButton($index, item)") - {{item.text}}
+								.input-group(ng-if="!item.text")
 									input.form-control(ng-model="item.text" placeholder="item")
 									.input-group-addon.btn-success(ng-click="pushItem(list, item)") ok
 									.input-group-addon.btn-danger(type="button" ng-click="list.items.splice($index)" aria-label="Remove") x

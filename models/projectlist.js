@@ -8,7 +8,7 @@ var projectsSchema = mongoose.Schema({
 
 	tasks 			: [{
 			text: String,
-			taskCost: {type: Number, default: 0},
+			taskCost: {type: Number, default: 1},
 			complete: {type: Boolean, default: false}
 		}],
 
