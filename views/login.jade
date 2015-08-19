@@ -1,5 +1,5 @@
 doctype html
-html(lang='en')
+html(lang='en' )
 	head
 		meta(charset="utf-8")
 		link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css", rel="stylesheet")
@@ -7,7 +7,7 @@ html(lang='en')
 		title ORDERLY
 
 	body.login-page
-		.container-fluid
+		.container-fluid(ng-controller="ModalCtrl")
 			.row.login-row-padding
 				.col-md-6.text-col
 					.col-md-7.col-md-offset-4.text-center.text-col
@@ -32,10 +32,14 @@ html(lang='en')
 									input.btn.form-control.add-btn-custom(type="submit")
 
 							p Need an account?
-								a  Sign up.
+								a(data-toggle="modal" data-target="#signup")  Sign up.
 
-						//- Form for allowing new users to register.
-							h1 Register
+		.modal.fade(id="signup" tabindex="-1" role="dialog")
+			.modal-dialog(role="document")
+				.modal-content
+					.modal-body
+						Form
+							h1 Sign Up
 							form.form-group(action="/auth/signup", method="post")
 								.form-group
 									input.form-control(type="text", name="username", placeholder="Username")
@@ -44,11 +48,13 @@ html(lang='en')
 								.form-group
 									input.form-control(type="password", name="password", placeholder="Password")
 								.form-group
-									input.form-control(type="submit")
-			
+									input.form-control.btn.success-btn(type="submit")
+
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js")
+		script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js")
 		script(src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular.js")
 		script(src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.3/ui-bootstrap-tpls.min.js")
 		script(src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular-route.js")
 		script(src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular-animate.js")
 		script(src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular-resource.js")
-		script(src="/js/main.js")
+		script(src="js/main.js")

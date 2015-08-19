@@ -1,0 +1,14 @@
+script(type='text/ng-template', id='new-user.jade')
+.modal-content
+	.modal-body
+		Form for allowing new users to register.
+			h1 Register
+			form.form-group(action="/auth/signup", method="post")
+				.form-group
+					input.form-control(type="text", name="username", placeholder="Username")
+				.form-group
+					input.form-control(type="email", name="email", placeholder="Email")
+				.form-group
+					input.form-control(type="password", name="password", placeholder="Password")
+				.form-group
+					input.form-control(type="submit")
